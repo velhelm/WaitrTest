@@ -12,8 +12,10 @@ var response
 app.get('/GetDriverReviews', function (req, res) {
    //Read from driver json file
    fs.readFile( __dirname + "/" + "drivers.json", 'utf8', function (err, data) {
-   		//if (err) 
-   		//	throw err
+   		if (err)
+		{
+			return console.log("Error fetching review: " + err)
+		}
    		drivers = JSON.parse(data)
    		//Read from reviews json file
    		fs.readFile( __dirname + "/" + "reviews.json", 'utf8', function (err, data) {
@@ -42,8 +44,10 @@ app.post('/CreateDeliveryReviews', function (req, res) {
    		drivers = JSON.parse(data)
 
    		fs.readFile( __dirname + "/" + "reviews.json", 'utf8', function (err, data) {
-   			//if (err)
-   			//	throw err
+   			if (err)
+			{
+				return console.log("Error adding review: " + err)
+			}
    			reviews = JSON.parse(data)
    			
    			//Verify driver id
@@ -69,15 +73,29 @@ app.post('/CreateDeliveryReviews', function (req, res) {
 
 
    				//Add to reviews
-   				review = '{ "driver_id": "' + driver_id +
-   					'", "delivery_id" : "' + req.query.delivery_id +
-   					'", rating" : ' + rating +
-   					', "description" " "' + req.query.description + '"';
-   				console.log(reviewText)
 
-   				reviews.push(review)
-   				res.end( reviews )
+   				reviews.push({ "driver_id" : driver_id.toString(),
+   					"delivery_id" : req.query.delivery_id.toString(),
+   					"rating" : rating.toString(), 
+   					"description" : req.query.description.toString()})
+   				console.log(reviews)
+   				res.end( "Review added" )//JSON.stringify(reviews) )
 
+   				fs.truncate(__dirname + "/" + "reviews.json", 0, function (err, data)
+   				{
+   					fs.writeFile(__dirname + "/" + "reviews.json", JSON.stringify(reviews), function (err, data)
+   					{
+   						if (err)
+   						{
+   							return console.log("Error writing file: " + err)
+   						}
+   					});
+   				});
+
+   			}
+   			else
+   			{
+   				res.end( "ERROR: Invalid driver")
    			}
    		});
    });
