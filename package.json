@@ -1,0 +1,23 @@
+{
+  "name": "waitrsampleservice",
+  "version": "1.0.0",
+  "description": "Driver Review Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/velhelm/WaitrTest.git"
+  },
+  "author": "Will Bass",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/velhelm/WaitrTest/issues"
+  },
+  "homepage": "https://github.com/velhelm/WaitrTest#readme",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
+}
