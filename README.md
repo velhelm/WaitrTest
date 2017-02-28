@@ -2,10 +2,15 @@
 This is a simple JavaScript based programming test for Waitr on the domain of driver reviews
 
 Dependencies:
+
 Express
+
 Postgres - the database schema is outlined in ./migrations
+
 Knex
+
 Nodemon
+
 
 --------------------------------------------
 
