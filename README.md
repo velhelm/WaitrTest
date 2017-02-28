@@ -17,7 +17,7 @@ Nodemon
 
 "http://127.0.0.1:8082/CreateDeliveryReviews?driver_id=2&delivery_id=5&rating=3&description=some description"
 
-Which gives a success or error and updates the local json file.
+Which gives a success or error and updates the postgres db
 
 http://127.0.0.1:8082/GetDriverReviews?driver_id=1
 
